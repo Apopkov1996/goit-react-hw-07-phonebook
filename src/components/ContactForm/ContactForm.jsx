@@ -3,6 +3,7 @@ import formcss from './contactform.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/selectors';
 import { addContact } from 'redux/cotactSlice';
+import { addContactThunk } from 'redux/operations';
 
 export const ContactForm = () => {
   const contacts = useSelector(selectContacts);
@@ -33,7 +34,7 @@ export const ContactForm = () => {
       return;
     }
 
-    dispatch(addContact({ name, number }));
+    dispatch(addContactThunk({ name, number }));
 
     setName('');
     setNumber('');

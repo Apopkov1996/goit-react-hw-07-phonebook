@@ -1,30 +1,46 @@
-const { createSlice, nanoid } = require('@reduxjs/toolkit');
+import {
+  addContactThunk,
+  deleteContactsThunk,
+  fetchDataThunk,
+} from './operations';
+
+const { createSlice } = require('@reduxjs/toolkit');
 
 const initialState = {
-  contacts: [
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ],
+  items: [],
+  isLoading: false,
+  error: null,
 };
 
 export const contactsSlice = createSlice({
   name: 'contacts',
   initialState,
   reducers: {
-    deleteContact: (state, { payload }) => {
-      state.contacts = state.contacts.filter(item => item.id !== payload);
-    },
-    addContact: {
-      prepare: ({ name, number }) => {
-        const id = nanoid();
-        return { payload: { id, name, number } };
-      },
-      reducer: (state, { payload }) => {
-        state.contacts.push(payload);
-      },
-    },
+    // deleteContact: (state, { payload }) => {
+    //   state.contacts = state.contacts.filter(item => item.id !== payload);
+    // },
+    // addContact: {
+    //   prepare: ({ name, number }) => {
+    //     const id = nanoid();
+    //     return { payload: { id, name, phone } };
+    //   },
+    //   reducer: (state, { payload }) => {
+    //     state.contacts.push(payload);
+    //   },
+    // },
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchDataThunk.fulfilled, (state, { payload }) => {
+        state.items = payload;
+        state.loading = false;
+      })
+      .addCase(deleteContactsThunk.fulfilled, (state, { payload }) => {
+        state.items = state.items.filter(item => item.id !== payload);
+      })
+      .addCase(addContactThunk.fulfilled, (state, { payload }) => {
+        state.items.push(payload);
+      });
   },
 });
 
