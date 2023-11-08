@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import formcss from './contactform.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/selectors';
-import { addContact } from 'redux/cotactSlice';
 import { addContactThunk } from 'redux/operations';
 
 export const ContactForm = () => {
