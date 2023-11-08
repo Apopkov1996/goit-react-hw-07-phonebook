@@ -3,6 +3,7 @@ import formcss from './contactform.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/selectors';
 import { addContactThunk } from 'redux/operations';
+import { toast } from 'react-toastify';
 
 export const ContactForm = () => {
   const contacts = useSelector(selectContacts);
@@ -29,11 +30,13 @@ export const ContactForm = () => {
     );
 
     if (isInContacts) {
-      alert(`${name} is already in contacts. `);
+      toast.info(`${name} is already in contacts. `);
       return;
     }
 
     dispatch(addContactThunk({ name, number }));
+
+    toast.success(`You added contact ${name}`);
 
     setName('');
     setNumber('');
