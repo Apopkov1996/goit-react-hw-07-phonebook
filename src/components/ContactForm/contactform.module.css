@@ -4,12 +4,10 @@
   align-items: center;
   text-align: center;
   gap: 20px;
-
-  border: 2px solid black;
-
+  border: 2px solid #ffb740;
   padding: 10px 20px;
 
-  background: whitesmoke;
+  margin-bottom: 25px;
 }
 
 .label {

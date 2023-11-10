@@ -6,11 +6,14 @@ import appcss from './app.module.css';
 export const App = () => {
   return (
     <div className={appcss.wrapper}>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts </h2>
-      <Filter />
-      <ContactList />
+      <div className={appcss.main_wrapper}>
+        {/* <img src="../../images/phone.png" alt="sad" /> */}
+        <h1 className={appcss.header}> PhoneBook</h1>
+        <ContactForm />
+        <h2 className={appcss.header}>Contacts </h2>
+        <Filter />
+        <ContactList />
+      </div>
     </div>
   );
 };
